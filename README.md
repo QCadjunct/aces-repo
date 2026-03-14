@@ -1,4 +1,4 @@
-# acms-langgraph-poc
+# acms-repo
 
 > **DEC VAX ACMS architecture patterns applied to LangGraph agentic orchestration.**  
 > Spec-governed. FQSN-registered. Fully audited. Task-oriented.  
