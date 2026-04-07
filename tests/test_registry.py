@@ -117,7 +117,7 @@ class TestClosedSetEnums:
         assert "skills/infra/python/persist"     in fqsns
 
     def test_task_fqsn_poc_task_present(self):
-        assert "tasks/pipeline/acms_proof" in {t.value for t in TaskFQSN}
+        assert "tasks/pipeline/aces_proof" in {t.value for t in TaskFQSN}
 
 
 # ── SkillRegistry Tests ───────────────────────────────────────────────────────
@@ -187,10 +187,10 @@ class TestSkillRegistry:
 class TestTaskRegistry:
     def _make_task(self) -> TaskRegistry:
         return TaskRegistry(
-            fqsn=TaskFQSN.PIPELINE_ACMS_PROOF,
+            fqsn=TaskFQSN.PIPELINE_ACES_PROOF,
             version=TaskVersion.V1_0_0,
-            fqsn_hash=sha256("tasks/pipeline/acms_proof:1.0.0:[]"),
-            description="ACMS POC — all four node types",
+            fqsn_hash=sha256("tasks/pipeline/aces_proof:1.0.0:[]"),
+            description="ACES POC — all four node types",
             skill_chaining=[
                 StepDefinition(
                     step=1,
@@ -274,7 +274,7 @@ class TestTaskRegistry:
 class TestWorkspaceStateAccumulation:
     def _make_state(self) -> WorkspaceState:
         return create_workspace(
-            task_fqsn=TaskFQSN.PIPELINE_ACMS_PROOF,
+            task_fqsn=TaskFQSN.PIPELINE_ACES_PROOF,
             task_version=TaskVersion.V1_0_0,
             definition={"description": "test"},
             failure_contracts=[
@@ -331,12 +331,12 @@ class TestWorkspaceStateAccumulation:
     def test_task_id_is_deterministic(self):
         """Same inputs must always produce the same task_id hash."""
         state1 = create_workspace(
-            task_fqsn=TaskFQSN.PIPELINE_ACMS_PROOF,
+            task_fqsn=TaskFQSN.PIPELINE_ACES_PROOF,
             task_version=TaskVersion.V1_0_0,
             definition={"description": "test"},
         )
         state2 = create_workspace(
-            task_fqsn=TaskFQSN.PIPELINE_ACMS_PROOF,
+            task_fqsn=TaskFQSN.PIPELINE_ACES_PROOF,
             task_version=TaskVersion.V1_0_0,
             definition={"description": "test"},
         )
@@ -345,12 +345,12 @@ class TestWorkspaceStateAccumulation:
     def test_task_id_changes_with_definition(self):
         """Different definition must produce different task_id."""
         state1 = create_workspace(
-            task_fqsn=TaskFQSN.PIPELINE_ACMS_PROOF,
+            task_fqsn=TaskFQSN.PIPELINE_ACES_PROOF,
             task_version=TaskVersion.V1_0_0,
             definition={"description": "version_a"},
         )
         state2 = create_workspace(
-            task_fqsn=TaskFQSN.PIPELINE_ACMS_PROOF,
+            task_fqsn=TaskFQSN.PIPELINE_ACES_PROOF,
             task_version=TaskVersion.V1_0_0,
             definition={"description": "version_b"},
         )

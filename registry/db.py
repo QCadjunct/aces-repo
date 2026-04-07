@@ -83,11 +83,11 @@ class DatabaseConfig(BaseModel):
     # Never an IP address — Tailscale DNS is the stable identifier.
 
     port:                   int           = 5432
-    database:               str           = "acms_registry"
-    user:                   str           = "acms"
+    database:               str           = "aces_registry"
+    user:                   str           = "aces"
     password:               str           = ""
     # "" = loaded from environment via field_validator below.
-    # ACMS_DB_PRIMARY_PASSWORD, ACMS_DB_REPLICA_1_PASSWORD, ACMS_DB_REPLICA_2_PASSWORD
+    # ACES_DB_PRIMARY_PASSWORD, ACES_DB_REPLICA_1_PASSWORD, ACES_DB_REPLICA_2_PASSWORD
 
     ssl_mode:               SslMode       = SslMode.REQUIRE
     pool_min_connections:   int           = 2
@@ -123,19 +123,19 @@ class DatabaseConfig(BaseModel):
         """
         Load password from environment variable if not provided directly.
         Environment variable names by role:
-            PRIMARY   → ACMS_DB_PRIMARY_PASSWORD
-            REPLICA_1 → ACMS_DB_REPLICA_1_PASSWORD
-            REPLICA_2 → ACMS_DB_REPLICA_2_PASSWORD
+            PRIMARY   → ACES_DB_PRIMARY_PASSWORD
+            REPLICA_1 → ACES_DB_REPLICA_1_PASSWORD
+            REPLICA_2 → ACES_DB_REPLICA_2_PASSWORD
         """
         if value:
             return value
         role = info.data.get("role")
         env_map = {
-            DatabaseRole.PRIMARY:   "ACMS_DB_PRIMARY_PASSWORD",
-            DatabaseRole.REPLICA_1: "ACMS_DB_REPLICA_1_PASSWORD",
-            DatabaseRole.REPLICA_2: "ACMS_DB_REPLICA_2_PASSWORD",
+            DatabaseRole.PRIMARY:   "ACES_DB_PRIMARY_PASSWORD",
+            DatabaseRole.REPLICA_1: "ACES_DB_REPLICA_1_PASSWORD",
+            DatabaseRole.REPLICA_2: "ACES_DB_REPLICA_2_PASSWORD",
         }
-        env_key = env_map.get(role, "ACMS_DB_PASSWORD")
+        env_key = env_map.get(role, "ACES_DB_PASSWORD")
         return os.environ.get(env_key, "")
 
 
@@ -187,9 +187,9 @@ class DatabaseRegistry:
         Factory — creates and initializes all three connection pools.
         Hosts default to Tailscale hostnames from environment if not provided.
         """
-        primary_host   = primary_host   or os.environ.get("ACMS_PRIMARY_HOST",   "thebeast.tail1234.ts.net")
-        replica_1_host = replica_1_host or os.environ.get("ACMS_REPLICA_1_HOST", "thebeast.tail1234.ts.net")
-        replica_2_host = replica_2_host or os.environ.get("ACMS_REPLICA_2_HOST", "minibeast.tail1234.ts.net")
+        primary_host   = primary_host   or os.environ.get("ACES_PRIMARY_HOST",   "thebeast.tail1234.ts.net")
+        replica_1_host = replica_1_host or os.environ.get("ACES_REPLICA_1_HOST", "thebeast.tail1234.ts.net")
+        replica_2_host = replica_2_host or os.environ.get("ACES_REPLICA_2_HOST", "minibeast.tail1234.ts.net")
 
         registry = cls(
             primary=DatabaseConfig(
@@ -279,7 +279,7 @@ class DatabaseRegistry:
 
 SCHEMA_DDL = """
 -- ═══════════════════════════════════════════════════════════════════════════
--- ACMS Registry Schema
+-- ACES Registry Schema
 -- D4 Temporal Registry Pattern — Mind Over Metadata LLC — Peter Heller
 -- ═══════════════════════════════════════════════════════════════════════════
 

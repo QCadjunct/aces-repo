@@ -7,7 +7,7 @@ Same API regardless of data source. UI never knows the difference.
 Architecture Standard: Mind Over Metadata LLC — Peter Heller
 
 Strategy:
-    1. Check ACMS_DATABASE_URL environment variable.
+    1. Check ACES_DATABASE_URL environment variable.
     2. If present and reachable → query PostgreSQL REPLICA_2.
     3. If absent or unreachable → return mock data silently.
     4. UI receives identical dict structure either way.
@@ -27,7 +27,7 @@ from ui.data.mock import generate_mock_sessions, generate_mock_registry
 # ── Connection Check ───────────────────────────────────────────────────────────
 
 def _db_url() -> str | None:
-    return os.environ.get("ACMS_DATABASE_URL") or None
+    return os.environ.get("ACES_DATABASE_URL") or None
 
 
 async def _db_reachable(url: str) -> bool:

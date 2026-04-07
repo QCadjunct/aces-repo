@@ -5,7 +5,7 @@ The invariant core — WorkspaceState accumulates across every node type.
 
 Architecture Standard: Mind Over Metadata LLC — Peter Heller
 
-ACMS Parallel:
+ACES Parallel:
     ACMS Workspace          → WorkspaceState
     ACMS Task Step          → WorkspaceEntry
     ACMS Workspace context  → WorkspaceState.entries (accumulated, never replaced)

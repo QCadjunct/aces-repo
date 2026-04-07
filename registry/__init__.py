@@ -1,7 +1,7 @@
 """
 registry/__init__.py
 
-ACMS Registry Package — public API.
+ACES Registry Package — public API.
 Mind Over Metadata LLC — Peter Heller
 
 Import from here. Not from submodules directly.

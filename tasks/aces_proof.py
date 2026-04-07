@@ -1,7 +1,7 @@
 """
 tasks/acms_proof.py
 
-ACMS Proof of Concept — The Singular Task That Proves the Thesis.
+ACES Proof of Concept — The Singular Task That Proves the Thesis.
 
 Architecture Standard: Mind Over Metadata LLC — Peter Heller
 
@@ -428,7 +428,7 @@ def build_enrichment_team() -> "CompiledGraph":
     async def researcher_node(state: WorkspaceState) -> dict:
         """Team member: researcher — SEARCH_TAVILY."""
         started = utcnow()
-        query = state.last_output or "ACMS LangGraph agentic architecture"
+        query = state.last_output or "ACES LangGraph agentic architecture"
 
         try:
             if tavily_available:
@@ -448,7 +448,7 @@ def build_enrichment_team() -> "CompiledGraph":
             else:
                 # POC mock — Tavily not required to prove the pattern
                 output = json.dumps([{
-                    "title": "ACMS Architecture Mock Result",
+                    "title": "ACES Architecture Mock Result",
                     "url": "https://mock.example.com",
                     "content": "Mock search result for POC validation",
                     "score": 0.9,
@@ -636,7 +636,7 @@ async def persist_node(state: WorkspaceState) -> dict:
     started = utcnow()
 
     try:
-        db_url = os.environ.get("ACMS_DATABASE_URL", "")
+        db_url = os.environ.get("ACES_DATABASE_URL", "")
         workspace_json = state.model_dump_json(indent=2)
         rows_written = 0
 
@@ -858,11 +858,11 @@ def make_subagent_wrapper(subgraph, step_number: int, skill_fqsn: SkillFQSN):
 
 # ── Main Graph Builder ────────────────────────────────────────────────────────
 
-async def build_acms_proof_graph(
+async def build_aces_proof_graph(
     db_registry: DatabaseRegistry | None = None,
 ) -> "CompiledGraph":
     """
-    Builds and compiles the complete ACMS Proof of Concept graph.
+    Builds and compiles the complete ACES Proof of Concept graph.
 
     Node inventory:
         extract         — Agent node (DATA_EXTRACT)
@@ -983,9 +983,9 @@ async def build_acms_proof_graph(
 
 # ── Task Execution Entry Point ────────────────────────────────────────────────
 
-async def run_acms_proof(raw_input: str) -> dict:
+async def run_aces_proof(raw_input: str) -> dict:
     """
-    Execute the ACMS Proof of Concept task end-to-end.
+    Execute the ACES Proof of Concept task end-to-end.
 
     Args:
         raw_input: Unstructured text to process through the full pipeline.
@@ -995,9 +995,9 @@ async def run_acms_proof(raw_input: str) -> dict:
     """
     # Create governed workspace
     initial_state = create_workspace(
-        task_fqsn=TaskFQSN.PIPELINE_ACMS_PROOF,
+        task_fqsn=TaskFQSN.PIPELINE_ACES_PROOF,
         task_version=TaskVersion.V1_0_0,
-        definition={"description": "ACMS Proof of Concept — all four node types"},
+        definition={"description": "ACES Proof of Concept — all four node types"},
         failure_contracts=[
             FailureContract(step=1, strategy=FailureStrategy.RETRY_STEP, max_retries=3),
             FailureContract(step=2, strategy=FailureStrategy.RETRY_STEP, max_retries=3),
@@ -1016,13 +1016,14 @@ async def run_acms_proof(raw_input: str) -> dict:
     })
 
     # Build graph
-    graph = await build_acms_proof_graph()
+    graph = await build_aces_proof_graph()
 
     # Execute — LangGraph accumulates WorkspaceState across all nodes
     config = {"configurable": {"thread_id": str(initial_state.session_id)}}
     final_state = await graph.ainvoke(initial_state, config=config)
 
-    return final_state.audit_summary()
+    final_state_obj = WorkspaceState(**final_state)
+    return final_state_obj.audit_summary()
 
 
 # ── CLI Entry Point ───────────────────────────────────────────────────────────
@@ -1037,12 +1038,12 @@ if __name__ == "__main__":
     )
 
     print("=" * 70)
-    print("ACMS PROOF OF CONCEPT")
+    print("ACES PROOF OF CONCEPT")
     print("Mind Over Metadata LLC — Peter Heller")
     print("=" * 70)
     print(f"\nInput: {raw_input[:80]}...\n")
 
-    result = asyncio.run(run_acms_proof(raw_input))
+    result = asyncio.run(run_aces_proof(raw_input))
 
     print(json.dumps(result, indent=2, default=str))
     print("\n" + "=" * 70)

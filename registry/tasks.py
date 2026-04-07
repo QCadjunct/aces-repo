@@ -13,11 +13,11 @@ Architecture Standard: Mind Over Metadata LLC — Peter Heller
 
 Task Taxonomy (three levels):
     L1 — domain     (pipeline, text, data, research)
-    L2 — subdomain  (acms_proof, full_chain, extract_validate)
+    L2 — subdomain  (aces_proof, full_chain, extract_validate)
     L3 — name       (leaf — the task itself)
 
 POC Task:
-    tasks/pipeline/acms_proof
+    tasks/pipeline/aces_proof
         Proves ALL of:
             Single Agent node
             Subagent delegation (Task-Call-Task)
@@ -34,8 +34,8 @@ class TaskFQSN(str, Enum):
 
     # ── Pipeline Tasks ────────────────────────────────────────────────────────
 
-    PIPELINE_ACMS_PROOF    = "tasks/pipeline/acms_proof"
-    # THE POC TASK — proves the ACMS/LangGraph thesis.
+    PIPELINE_ACES_PROOF    = "tasks/pipeline/aces_proof"
+    # THE POC TASK — proves the ACES/LangGraph thesis.
     #
     # skill_chaining (happy path):
     #     Step 1: DATA_EXTRACT           ← Agent node

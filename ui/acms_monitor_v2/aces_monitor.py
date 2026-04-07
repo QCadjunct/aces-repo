@@ -1,7 +1,7 @@
 """
 ui/aces_monitor.py
 
-ACMS Monitor — Three-Panel Marimo Notebook.
+ACES Monitor — Three-Panel Marimo Notebook.
 Marimo rule: create UIElements in one cell, access .value in a separate downstream cell.
 
 Architecture Standard: Mind Over Metadata LLC — Peter Heller
@@ -11,7 +11,7 @@ Run as app:       marimo run  ui/aces_monitor.py
 
 import marimo as mo
 
-app = mo.App(width="full", app_title="ACMS Monitor — Mind Over Metadata LLC")
+app = mo.App(width="full", app_title="ACES Monitor — Mind Over Metadata LLC")
 
 
 # ── Cell 1: marimo ────────────────────────────────────────────────────────────
@@ -71,11 +71,11 @@ def _header(mo, using_live_db):
     _src = (
         mo.md("🟢 **Live PostgreSQL**").callout(kind="success")
         if using_live_db()
-        else mo.md("🟡 **Mock data** — set `ACMS_DATABASE_URL` in `.env`").callout(kind="warn")
+        else mo.md("🟡 **Mock data** — set `ACES_DATABASE_URL` in `.env`").callout(kind="warn")
     )
     header = mo.vstack([
-        mo.md("# 🏛️ ACMS Monitor"),
-        mo.md("**Mind Over Metadata LLC** — Peter Heller &nbsp;|&nbsp; `QCadjunct/acms-langgraph-poc`"),
+        mo.md("# 🏛️ ACES Monitor"),
+        mo.md("**Mind Over Metadata LLC** — Peter Heller &nbsp;|&nbsp; `QCadjunct/aces-repo`"),
         _src,
     ])
     return (header,)
@@ -337,7 +337,7 @@ def _p3_content(mo, pd, sessions, p3_select):
 
     panel3 = mo.vstack([
         mo.md("## 🔄 Pipeline Dashboard"),
-        mo.md("_ACMS monitor console — watching tasks execute in real time_"),
+        mo.md("_ACES monitor console — watching tasks execute in real time_"),
         p3_select,
         cards,
         mo.md("### Execution Graph"),

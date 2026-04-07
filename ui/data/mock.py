@@ -197,7 +197,7 @@ def _hard_fail(base, task_id):
 def _session(task_id, base, total_ms, entries, errors, is_failed, status, mode):
     return {
         "task_id": task_id,
-        "task_fqsn": TaskFQSN.PIPELINE_ACMS_PROOF.value,
+        "task_fqsn": TaskFQSN.PIPELINE_ACES_PROOF.value,
         "task_version": "1.0.0",
         "session_id": str(uuid4()),
         "operating_mode": mode.value,
@@ -269,11 +269,11 @@ def generate_mock_registry(seed: int = 42) -> dict:
     return {
         "skill_records": skill_records,
         "task_records": [{
-            "fqsn": TaskFQSN.PIPELINE_ACMS_PROOF.value,
+            "fqsn": TaskFQSN.PIPELINE_ACES_PROOF.value,
             "version": "1.0.0",
-            "fqsn_hash": _sha256("tasks/pipeline/acms_proof:1.0.0"),
+            "fqsn_hash": _sha256("tasks/pipeline/aces_proof:1.0.0"),
             "previous_hash": "",
-            "description": "ACMS Proof of Concept — all four node types",
+            "description": "ACES Proof of Concept — all four node types",
             "operating_mode": "maas",
             "step_count": 4,
             "has_subagents": True,

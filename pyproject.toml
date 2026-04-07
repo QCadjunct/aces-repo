@@ -19,6 +19,9 @@ dependencies = [
     "tavily-python>=0.3.0",
     "python-dotenv>=1.0.0",
     "marimo",
+    "duckdb>=1.5.1",
+    "polars>=1.39.3",
+    "pyarrow>=23.0.1",
 ]
 
 [project.optional-dependencies]
